@@ -12,14 +12,14 @@ Numba compiles Python code down to C level machine code. Numba is very useful fo
 
 ## Recording Time
 
-Python's interpreted nature means that time starts instantly, before Numba compiling even finishes. A compiled language like Go or Java starts recording time after compiling finishes. Therefore, for a trivial function like `"hello world"`, Go will record the completion time as 0.000 sec while Python-Numba will record the completion time as 0.123 sec. The correct workaround is to record time using a shell (Powershell, Bash, Zsh), but I'm too lazy to do that...
+Python's interpreted nature means that time starts instantly, before Numba compiling even finishes. A compiled language like Go or Java starts recording time after compiling finishes. Therefore, in a trivial function like `hello_world`, Go will record the completion time as 0.000 sec while Python-Numba will record the completion time as 0.123 sec. The correct workaround is to record time using a shell (Powershell, Bash, Zsh), but I'm too lazy to do that...
 
 To make the comparison fair, I ran the Python-Numba sequence 6 times (1st time to get compiling out of the way). The other 5 times are averaged as the actual result.
 
 ## Fibonacci Sequence (Naive)
 
-This is the basic Fibonacci sequence we all learn at school.  
-The sequence goes like: 0, 1, 1, 2, 3, 5, 8 ...
+This is the basic Fibonacci sequence we all learned at school.  
+The sequence goes like: 0, 1, 1, 2, 3, 5, 8 ...  
 The 47th position is 2,971,215,073.
 
 | Language          | n-th number   | Average Time (sec) | Improvement over Slowest |
@@ -32,15 +32,15 @@ The 47th position is 2,971,215,073.
 
 ## Fibonacci Sequence (Memoize)
 
-This is an optimized Fibonacci sequence that uses memoization to avoid recalculating past numbers. Numba is actually slower here than native Python because of the compile time!!
+This is an optimized Fibonacci sequence that uses memoization to avoid recalculating past numbers. **Numba is actually slower here due to the compile time!!**
 
-Increasing the n-th number does not change the completion time. For example, n=200 also results in 0.000 sec time. Increasing this number further risks hitting the built-in recursion depth limit or exceeding the `int64` max value.
+Increasing the n-th number does not significantly change the completion time. For example, n=92 also results in 0.000 sec time. Increasing this number further risks hitting the built-in recursion depth limit or exceeding the `int64` max value. The largest n-th Fibonacci number that we can find with `int64` is n=92. Fun fact: Python `int` can actually exceed this limit because its `int` is virtually unbounded.
 
 | Language          | n-th number   | Average Time (sec) | Improvement over Slowest |
 | ------------------|---------------|--------------------| ------------------------ |
-| Python            | 47            | 0.000              | 0
-| Python with Numba | 47            | 0.000              | 0
-| Go                | 47            | 0.000              | 0
+| Python            | 47            | 0.000              | 0                        |
+| Python with Numba | 47            | 0.000              | 0                        |
+| Go                | 47            | 0.000              | 0                        |
 
 *Numba compile time ~= 0.218 seconds*
 
@@ -61,3 +61,9 @@ For Python, get an instant 26x speed increase by typing the decorator `@njit` (w
     - This step is often painful and time-consuming as you try to guess the correct synatx.
     - My opinion is that if you need to write an entire Python class with `@jitclass`, then you can probably write it faster in another language.
     - Just don't use `@jitclass` until it's further developed...
+
+## Test Machine
+
+CPU: AMD Ryzen 5600x  
+RAM: 16 GB  
+OS: Windows 10  
