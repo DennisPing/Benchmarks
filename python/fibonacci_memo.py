@@ -8,7 +8,7 @@ def fib_memo(n, memo):
     return memo[n]
 
 def main():
-    n = 92
+    n = 47
     memo = [0] * (n+1)
     acc = 0
     for _ in range(5):
