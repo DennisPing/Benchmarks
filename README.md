@@ -1,6 +1,11 @@
 # Benchmarks
 Fun benchmarks for various programming languages
 
+## Languages Tested
+- [x] Python3
+- [x] Go
+- [ ] Java
+
 ## Numba Library
 
 Numba compiles Python code down to C level machine code. Numba is very useful for number crunching and doing repetitive calculations. However, it is worse for small calculations because it requires extra compile time while native Python can run immediately.
@@ -9,7 +14,7 @@ Numba compiles Python code down to C level machine code. Numba is very useful fo
 
 Python's interpreted nature means that time starts instantly, before Numba compiling even finishes. A compiled language like Go or Java starts recording time after compiling finishes. Therefore, for a trivial function like `"hello world"`, Go will record the completion time as 0.000 sec while Python-Numba will record the completion time as 0.123 sec. The correct workaround is to record time using a shell (Powershell, Bash, Zsh), but I'm too lazy to do that...
 
-To make the comparison fair, I ran the Python-Numba sequence 5 times (1st time to get compiling out of the way). The other 4 times are averaged as the actual result.
+To make the comparison fair, I ran the Python-Numba sequence 6 times (1st time to get compiling out of the way). The other 5 times are averaged as the actual result.
 
 ## Fibonacci Sequence (Naive)
 
@@ -20,7 +25,7 @@ The 47th position is 2,971,215,073.
 | Language          | n-th number   | Average Time (sec) | Improvement over Slowest |
 | ----------------- | ------------- | ------------------ | ------------------------ |
 | Python            | 47            | 455.609            | 0                        |
-| Python with Numba | 47            | 17.437             | 26x                      |
+| Python with Numba | 47            | 17.308             | 26x                      |
 | Go                | 47            | 13.040             | 35x                      |
 
 *Numba compile time ~= 0.218 seconds*
